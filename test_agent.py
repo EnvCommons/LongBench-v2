@@ -31,6 +31,7 @@ async def main() -> None:
 
     async with environment.session(task=task) as session:
         prompt = await session.get_prompt()
+        print(prompt)
 
         input_list = [{
             "role": "user",

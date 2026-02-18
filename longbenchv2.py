@@ -9,7 +9,8 @@ from openreward.environments import (
     JSONObject,
     TextBlock,
     ToolOutput,
-    tool
+    tool,
+    Split
 )
 
 from constants import ENV_PATH
@@ -90,14 +91,21 @@ class LongBenchV2(Environment):
     def list_splits(cls) -> list[str]:
         """Return all available splits."""
         return [
-            "test",
+            Split(name="test", type="test"),
             # Domain-based splits
-            "single-doc-qa", "multi-doc-qa", "long-icl",
-            "long-dialogue", "code-repo", "structured-data",
+            Split(name="single-doc-qa", type="test"),
+            Split(name="multi-doc-qa", type="test"),
+            Split(name="long-icl", type="test"),
+            Split(name="long-dialogue", type="test"),
+            Split(name="code-repo", type="test"),
+            Split(name="structured-data", type="test"),
             # Difficulty-based splits
-            "easy", "hard",
+            Split(name="easy", type="test"),
+            Split(name="hard", type="test"),
             # Length-based splits
-            "short", "medium", "long"
+            Split(name="short", type="test"),
+            Split(name="medium", type="test"),
+            Split(name="long", type="test")
         ]
 
     @classmethod
