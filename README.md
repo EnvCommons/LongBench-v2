@@ -1,6 +1,6 @@
 # LongBench v2 Environment
 
-OpenReward environment for the LongBench v2 benchmark: long-context understanding and reasoning evaluation.
+ORS OpenReward environment for the LongBench v2 benchmark: long-context understanding and reasoning evaluation.
 
 ## Overview
 
