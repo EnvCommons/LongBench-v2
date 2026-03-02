@@ -1,7 +1,6 @@
 # LongBench-v2
 
-[![OpenReward Badge](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/GeneralReasoning/LongBenchV2)
-[![Hugging Face Badge](https://img.shields.io/badge/Hugging%20Face-Dataset-orange)](https://huggingface.co/datasets/THUDM/LongBench-v2)
+[![OpenReward Badge](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/GeneralReasoning/LongBenchV2) [![Hugging Face Badge](https://img.shields.io/badge/Hugging%20Face-Dataset-orange)](https://huggingface.co/datasets/THUDM/LongBench-v2)
 
 ## Description
 
@@ -58,11 +57,26 @@ longbench_v2.parquet (162 MB) sourced from [HuggingFace THUDM/LongBench-v2](http
 
 ## Time Horizon
 
-Single-turn evaluation.
+Single-turn evaluation with one tool call.
 
 ## Environment Difficulty
 
-Tasks require deep comprehension of documents spanning 8K to 2M words. The benchmark is designed to be challenging for both humans and LLMs, with context lengths that push the limits of current model architectures.
+The [LongBench v2 Leaderboard](https://longbench2.github.io/#leaderboard) evaluates frontier models (Accuracy %):
+
+| Model | Accuracy |
+|-------|----------|
+| Gemini-2.5-Pro | 63.3% |
+| Gemini-2.5-Flash | 62.1% |
+| Qwen3-235B-A22B-Thinking | 60.6% |
+| DeepSeek-R1 | 58.3% |
+| o1-preview | 57.7% |
+| Human Baseline | 53.7% |
+| GPT-4o | 51.4% |
+| Claude 3.5 Sonnet | 46.7% |
+| Qwen2.5-72B | 43.5% |
+| o1-mini | 38.9% |
+
+Human experts achieved 53.7% accuracy under a 15-minute time constraint.
 
 ## Other Environment Requirements
 
