@@ -27,7 +27,7 @@ class SubmitAnswerInput(BaseModel, extra="forbid"):
 
 
 # Load data at module level with fallback logic
-PARQUET_FILE = ENV_PATH / "longbenchv2" / "longbench_v2.parquet"
+PARQUET_FILE = ENV_PATH / "longbench_v2.parquet"
 
 if PARQUET_FILE.exists():
     # Production path: /orwd_data/longbenchv2/longbench_v2.parquet

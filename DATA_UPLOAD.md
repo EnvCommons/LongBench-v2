@@ -5,7 +5,7 @@ This environment requires the LongBench-v2 dataset (503 long-context multiple-ch
 
 ## Directory Structure
 ```
-/orwd_data/longbenchv2/
+/orwd_data/
 └── longbench_v2.parquet (162 MB)
 ```
 
@@ -34,7 +34,7 @@ python -c "from datasets import load_dataset; load_dataset('THUDM/LongBench-v2',
 ## Upload Instructions
 1. Generate the parquet file using the script above
 2. Upload to your OpenReward namespace at https://openreward.ai
-3. Upload to path: `/orwd_data/longbenchv2/longbench_v2.parquet`
+3. Upload to path: `/orwd_data/longbench_v2.parquet`
 
 ## Dataset Statistics
 - **Total tasks**: 503
