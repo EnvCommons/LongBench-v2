@@ -1,112 +1,98 @@
-# LongBench v2 Environment
+# LongBench-v2
 
-ORS OpenReward environment for the LongBench v2 benchmark: long-context understanding and reasoning evaluation.
+[![OpenReward Badge](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/GeneralReasoning/LongBenchV2) [![Hugging Face Badge](https://img.shields.io/badge/Hugging%20Face-Dataset-orange)](https://huggingface.co/datasets/THUDM/LongBench-v2)
 
-## Overview
+## Description
 
-LongBench v2 contains 503 challenging multiple-choice questions with contexts ranging from 8k to 2M words across six major categories:
+LongBench-v2 is an environment for evaluating long-context understanding and reasoning. Based on the LongBench v2 benchmark from THUDM, agents are given long documents (8K–2M words) and must answer multiple-choice questions (A/B/C/D) that require deep comprehension across six task domains.
 
-- **Single-Document QA** (175 tasks)
-- **Multi-Document QA** (125 tasks)
-- **Long In-context Learning** (81 tasks)
-- **Long-dialogue History Understanding** (39 tasks)
-- **Code Repository Understanding** (50 tasks)
-- **Long Structured Data Understanding** (33 tasks)
+## Capabilities
 
-This benchmark tests models' ability to understand and reason over very long contexts, with human expert performance at 53.7% accuracy (15-minute time constraint).
+- **Long-context document comprehension** (8K–2M words)
+- **Multiple-choice reasoning** over extended text
+- **Cross-domain understanding** including QA, code, dialogue, structured data, and in-context learning
 
-## Splits
+## Compute Requirements
 
-### Primary
-- **`test`**: All 503 tasks
+Agents are given a standard environment with no sandbox or file system access.
 
-### Domain-based
-- `single-doc-qa`: Single-document question answering (175 tasks)
-- `multi-doc-qa`: Multi-document question answering (125 tasks)
-- `long-icl`: Long in-context learning (81 tasks)
-- `long-dialogue`: Long dialogue history understanding (39 tasks)
-- `code-repo`: Code repository understanding (50 tasks)
-- `structured-data`: Long structured data understanding (33 tasks)
+## License
 
-### Difficulty-based
-- `easy`: Easier questions (192 tasks)
-- `hard`: Harder questions (311 tasks)
+[Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0)
 
-### Length-based
-- `short`: Shorter contexts, 8k-30k words (180 tasks)
-- `medium`: Medium contexts, 30k-100k words (215 tasks)
-- `long`: Longer contexts, 100k-2M words (108 tasks)
+## Tasks
 
-## Usage
+One primary split: **test** (503 tasks).
 
-### Local Testing
+Also available as domain-based splits:
+- single-doc-qa (175 tasks)
+- multi-doc-qa (125 tasks)
+- long-icl (81 tasks)
+- long-dialogue (39 tasks)
+- code-repo (50 tasks)
+- structured-data (33 tasks)
 
-```bash
-# Download dataset
-python -c "from datasets import load_dataset; load_dataset('THUDM/LongBench-v2', split='train').to_parquet('longbench_v2.parquet')"
+Tasks span three difficulty levels:
+- easy: 192 tasks
+- hard: 311 tasks
 
-# Start server
-python server.py
+Tasks span three length categories:
+- short (8K–30K words): 180 tasks
+- medium (30K–100K words): 215 tasks
+- long (100K–2M words): 108 tasks
 
-# Run test agent (requires OPENAI_API_KEY environment variable)
-export OPENAI_API_KEY=your-key-here
-python test_agent.py
-```
+## Reward Structure
 
-### Docker
+Single-turn evaluation. Agents submit an answer choice (A/B/C/D) via the `submit_answer` tool. Reward is deterministic based on exact match:
+- **1.0** if the submitted answer is correct
+- **0.0** if the submitted answer is incorrect
 
-```bash
-# Build image
-docker build -t longbenchv2 .
+## Data
 
-# Run with local data mount
-docker run -v $(pwd)/longbench_v2.parquet:/orwd_data/longbenchv2/longbench_v2.parquet -p 8080:8080 longbenchv2
-```
+longbench_v2.parquet (162 MB) sourced from [HuggingFace THUDM/LongBench-v2](https://huggingface.co/datasets/THUDM/LongBench-v2). Data is stored on the OpenReward platform.
 
 ## Tools
 
-- **`submit_answer(answer: str)`**: Submit your answer (A, B, C, or D)
-  - Accepts both uppercase (A/B/C/D) and lowercase (a/b/c/d)
-  - Returns reward 1.0 for correct, 0.0 for incorrect
-  - Ends the episode
+**`submit_answer`**: Submit an answer choice (A, B, C, or D) to the multiple-choice question. This is the only tool available and completes the task.
 
-## Task Format
+## Time Horizon
 
-Each task consists of:
-- **Context**: Very long text (8k to 2M words) - documents, code, structured data, etc.
-- **Question**: Multiple-choice question about the context
-- **Choices**: Four options (A, B, C, D)
-- **Answer**: Single letter indicating the correct choice
+Single-turn evaluation with one tool call.
 
-## Performance Benchmarks
+## Environment Difficulty
 
-From the original paper:
-- **Human experts** (15-min limit): 53.7% accuracy
-- **Direct LLM answering**: ~50.1% accuracy
-- **o1-preview**: 57.7% accuracy
+The [LongBench v2 Leaderboard](https://longbench2.github.io/#leaderboard) evaluates frontier models (Accuracy %):
 
-## Data Requirements
+| Model | Accuracy |
+|-------|----------|
+| Gemini-2.5-Pro | 63.3% |
+| Gemini-2.5-Flash | 62.1% |
+| Qwen3-235B-A22B-Thinking | 60.6% |
+| DeepSeek-R1 | 58.3% |
+| o1-preview | 57.7% |
+| Human Baseline | 53.7% |
+| GPT-4o | 51.4% |
+| Claude 3.5 Sonnet | 46.7% |
+| Qwen2.5-72B | 43.5% |
+| o1-mini | 38.9% |
 
-See [DATA_UPLOAD.md](DATA_UPLOAD.md) for dataset upload instructions. The dataset must be uploaded to OpenReward cloud storage at `/orwd_data/longbenchv2/longbench_v2.parquet`.
+Human experts achieved 53.7% accuracy under a 15-minute time constraint.
 
-## Dataset Source
+## Other Environment Requirements
 
-- **HuggingFace**: [THUDM/LongBench-v2](https://huggingface.co/datasets/THUDM/LongBench-v2)
-- **Paper**: [LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks](https://arxiv.org/abs/2412.15204)
-- **Project Page**: https://longbench2.github.io
-- **Leaderboard**: https://longbench2.github.io/#leaderboard
+There are no further environment requirements; LongBench-v2 works out of the box with the OpenReward endpoint without any external API keys.
 
-## Citation
+## Safety
+
+Agents in LongBench-v2 answer multiple-choice questions about long documents in a standard environment. The environment does not present direct safety risks.
+
+## Citations
 
 ```bibtex
-@article{longbenchv2,
+@article{bai2024longbenchv2,
   title={LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks},
-  author={Yushi Bai and Shangqing Tu and Jiajie Zhang and Hao Peng and Xiaozhi Wang and Xin Lv and Shulin Cao and Jiazheng Xu and Lei Hou and Yuxiao Dong and Jie Tang and Juanzi Li},
+  author={Bai, Yushi and others},
   journal={arXiv preprint arXiv:2412.15204},
   year={2024}
 }
 ```
-
-## License
-
-Apache 2.0 (dataset license from HuggingFace)
