@@ -1,6 +1,6 @@
 # LongBench-v2
 
-[![OpenReward Badge](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/GeneralReasoning/LongBenchV2) [![Hugging Face Badge](https://img.shields.io/badge/Hugging%20Face-Dataset-orange)](https://huggingface.co/datasets/THUDM/LongBench-v2)
+[![OpenReward Badge](https://img.shields.io/badge/%E2%AD%90%20OpenReward-Environment-f7e6cc)](https://openreward.ai/bys0318//LongBenchV2) [![Hugging Face Badge](https://img.shields.io/badge/Hugging%20Face-Dataset-orange)](https://huggingface.co/datasets/THUDM/LongBench-v2)
 
 ## Description
 
