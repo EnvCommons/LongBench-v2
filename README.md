@@ -89,10 +89,13 @@ Agents in LongBench-v2 answer multiple-choice questions about long documents in 
 ## Citations
 
 ```bibtex
-@article{bai2024longbenchv2,
-  title={LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks},
-  author={Bai, Yushi and others},
-  journal={arXiv preprint arXiv:2412.15204},
-  year={2024}
+@misc{bai2025longbenchv2deeperunderstanding,
+      title={LongBench v2: Towards Deeper Understanding and Reasoning on Realistic Long-context Multitasks}, 
+      author={Yushi Bai and Shangqing Tu and Jiajie Zhang and Hao Peng and Xiaozhi Wang and Xin Lv and Shulin Cao and Jiazheng Xu and Lei Hou and Yuxiao Dong and Jie Tang and Juanzi Li},
+      year={2025},
+      eprint={2412.15204},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2412.15204}, 
 }
 ```
